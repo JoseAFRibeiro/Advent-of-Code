@@ -1,21 +1,5 @@
 const std = @import("std");
 
-const number = struct {
-    b1: u8,
-    b2: u8,
-    b3: u8,
-    b4: u8,
-    b5: u8,
-};
-
-const padding = struct {
-    b1: u8,
-    b2: u8,
-    b3: u8,
-};
-
-const line = struct { a: number, b: padding, c: number };
-
 pub fn main() !void {
     var inputs1: [1000]u64 = undefined;
     var inputs2: [1000]u64 = undefined;
@@ -60,11 +44,25 @@ pub fn main() !void {
     std.mem.sort(u64, &inputs1, {}, std.sort.asc(u64));
     std.mem.sort(u64, &inputs2, {}, std.sort.asc(u64));
 
+    iter = 0;
+    var score: u64 = 0;
+    var score_list: [1000]u64 = undefined;
+
+    for (inputs1) |n1| {
+        for (inputs2) |n2| {
+            if (n1 == n2) {
+                score += 1;
+            }
+        }
+        score_list[iter] = score;
+        score = 0;
+        iter += 1;
+    }
+
     var sum: u64 = 0;
 
-    for (inputs1, inputs2) |num, num2| {
-        const diff: i64 = @as(i64, @intCast(num)) - @as(i64, @intCast(num2));
-        sum += @abs(diff);
+    for (inputs1, score_list) |n, i| {
+        sum += n * i;
     }
 
     std.debug.print("Answer {d}\n", .{sum});
