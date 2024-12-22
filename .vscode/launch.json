@@ -9,9 +9,9 @@
                 "type": "lldb",
                 "request": "launch",
                 "name": "Debug",
-                "program": "${workspaceFolder}/2024/day1/day1",
+                "program": "${workspaceFolder}/2024/day2/day2",
                 "args": ["/usr/bin/zig"],
-                "cwd": "${workspaceFolder}/2024/day1/",
+                "cwd": "${workspaceFolder}/2024/day2/",
                 
             }
         ]
